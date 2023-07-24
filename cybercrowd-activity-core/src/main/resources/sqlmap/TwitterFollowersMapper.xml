@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.TwitterFollowersMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.TwitterFollowers">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="twitter_id" jdbcType="VARCHAR" property="twitterId" />
+    <result column="twitter_name" jdbcType="VARCHAR" property="twitterName" />
+    <result column="twitter_user_name" jdbcType="VARCHAR" property="twitterUserName" />
+    <result column="follow_status" jdbcType="CHAR" property="followStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, twitter_id, twitter_name, twitter_user_name, follow_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from twitter_followers
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from twitter_followers
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cybercrowd.activity.model.TwitterFollowers" keyColumn="id" useGeneratedKeys="true">
+    insert into twitter_followers (id, twitter_id, twitter_name, 
+      twitter_user_name, follow_status, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{twitterId,jdbcType=VARCHAR}, #{twitterName,jdbcType=VARCHAR}, 
+      #{twitterUserName,jdbcType=VARCHAR}, #{followStatus,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cybercrowd.activity.model.TwitterFollowers" keyColumn="id" useGeneratedKeys="true">
+    insert into twitter_followers
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="twitterId != null">
+        twitter_id,
+      </if>
+      <if test="twitterName != null">
+        twitter_name,
+      </if>
+      <if test="twitterUserName != null">
+        twitter_user_name,
+      </if>
+      <if test="followStatus != null">
+        follow_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="twitterId != null">
+        #{twitterId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterName != null">
+        #{twitterName,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUserName != null">
+        #{twitterUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="followStatus != null">
+        #{followStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.TwitterFollowers">
+    update twitter_followers
+    <set>
+      <if test="twitterId != null">
+        twitter_id = #{twitterId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterName != null">
+        twitter_name = #{twitterName,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUserName != null">
+        twitter_user_name = #{twitterUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="followStatus != null">
+        follow_status = #{followStatus,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.TwitterFollowers">
+    update twitter_followers
+    set twitter_id = #{twitterId,jdbcType=VARCHAR},
+      twitter_name = #{twitterName,jdbcType=VARCHAR},
+      twitter_user_name = #{twitterUserName,jdbcType=VARCHAR},
+      follow_status = #{followStatus,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectOne" parameterType="org.cybercrowd.activity.model.TwitterFollowers" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from twitter_followers
+    <where>
+      <if test="twitterId != null">
+        AND twitter_id = #{twitterId,jdbcType=VARCHAR}
+      </if>
+      <if test="twitterName != null">
+        AND twitter_name = #{twitterName,jdbcType=VARCHAR}
+      </if>
+      <if test="twitterUserName != null">
+        AND twitter_user_name = #{twitterUserName,jdbcType=VARCHAR}
+      </if>
+      <if test="followStatus != null">
+        AND follow_status = #{followStatus,jdbcType=CHAR}
+      </if>
+      <if test="createTime != null">
+        AND create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null">
+        AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </select>
+</mapper>

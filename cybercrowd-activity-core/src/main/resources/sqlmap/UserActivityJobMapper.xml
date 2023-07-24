@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.UserActivityJobMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.UserActivityJob">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="owner_account_type" jdbcType="VARCHAR" property="ownerAccountType" />
+    <result column="owner_id" jdbcType="VARCHAR" property="ownerId" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="twitter_id" jdbcType="VARCHAR" property="twitterId" />
+    <result column="twitter_info" jdbcType="VARCHAR" property="twitterInfo" />
+    <result column="twitter_job_status" jdbcType="CHAR" property="twitterJobStatus" />
+    <result column="discord_id" jdbcType="VARCHAR" property="discordId" />
+    <result column="discord_info" jdbcType="VARCHAR" property="discordInfo" />
+    <result column="discord_job_status" jdbcType="CHAR" property="discordJobStatus" />
+    <result column="telegram_id" jdbcType="VARCHAR" property="telegramId" />
+    <result column="telegram_info" jdbcType="VARCHAR" property="telegramInfo" />
+    <result column="telegram_job_status" jdbcType="CHAR" property="telegramJobStatus" />
+    <result column="job_status" jdbcType="CHAR" property="jobStatus" />
+    <result column="job_success_time" jdbcType="TIMESTAMP" property="jobSuccessTime" />
+    <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+    <result column="parent_invite_code" jdbcType="VARCHAR" property="parentInviteCode" />
+    <result column="invite_users_number" jdbcType="BIGINT" property="inviteUsersNumber" />
+    <result column="login_token" jdbcType="VARCHAR" property="loginToken" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_name, owner_account_type, owner_id, content, twitter_id, twitter_info, twitter_job_status, 
+    discord_id, discord_info, discord_job_status, telegram_id, telegram_info, telegram_job_status, 
+    job_status, job_success_time, invite_code, parent_invite_code, invite_users_number, 
+    login_token, create_time, update_time
+  </sql>
+  <sql id="Base_Column_Where">
+    <where>
+      <if test="jobName != null">
+        and job_name = #{jobName,jdbcType=VARCHAR}
+      </if>
+      <if test="ownerAccountType != null">
+        and owner_account_type = #{ownerAccountType,jdbcType=VARCHAR}
+      </if>
+      <if test="ownerId != null">
+        and owner_id = #{ownerId,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+        and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="twitterId != null">
+        and twitter_id = #{twitterId,jdbcType=VARCHAR}
+      </if>
+      <if test="twitterInfo != null">
+        and twitter_info = #{twitterInfo,jdbcType=VARCHAR}
+      </if>
+      <if test="twitterJobStatus != null">
+        and twitter_job_status = #{twitterJobStatus,jdbcType=CHAR}
+      </if>
+      <if test="discordId != null">
+        and discord_id = #{discordId,jdbcType=VARCHAR}
+      </if>
+      <if test="discordInfo != null">
+        and discord_info = #{discordInfo,jdbcType=VARCHAR}
+      </if>
+      <if test="discordJobStatus != null">
+        and discord_job_status = #{discordJobStatus,jdbcType=CHAR}
+      </if>
+      <if test="telegramId != null">
+        and telegram_id = #{telegramId,jdbcType=VARCHAR}
+      </if>
+      <if test="telegramInfo != null">
+        and telegram_info = #{telegramInfo,jdbcType=VARCHAR}
+      </if>
+      <if test="telegramJobStatus != null">
+        and telegram_job_status = #{telegramJobStatus,jdbcType=CHAR}
+      </if>
+      <if test="jobStatus != null">
+        and job_status = #{jobStatus,jdbcType=CHAR}
+      </if>
+      <if test="jobSuccessTime != null">
+        and job_success_time = #{jobSuccessTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="inviteCode != null">
+        and invite_code = #{inviteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="parentInviteCode != null">
+        and parent_invite_code = #{parentInviteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="inviteUsersNumber != null">
+        and invite_users_number = #{inviteUsersNumber,jdbcType=BIGINT}
+      </if>
+      <if test="loginToken != null">
+        and login_token = #{loginToken,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_activity_job
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_activity_job
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cybercrowd.activity.model.UserActivityJob" keyColumn="id" useGeneratedKeys="true">
+    insert into user_activity_job (id, job_name, owner_account_type, 
+      owner_id, content, twitter_id, 
+      twitter_info, twitter_job_status, discord_id, 
+      discord_info, discord_job_status, telegram_id, 
+      telegram_info, telegram_job_status, job_status, 
+      job_success_time, invite_code, parent_invite_code, 
+      invite_users_number, login_token, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{jobName,jdbcType=VARCHAR}, #{ownerAccountType,jdbcType=VARCHAR}, 
+      #{ownerId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{twitterId,jdbcType=VARCHAR}, 
+      #{twitterInfo,jdbcType=VARCHAR}, #{twitterJobStatus,jdbcType=CHAR}, #{discordId,jdbcType=VARCHAR}, 
+      #{discordInfo,jdbcType=VARCHAR}, #{discordJobStatus,jdbcType=CHAR}, #{telegramId,jdbcType=VARCHAR}, 
+      #{telegramInfo,jdbcType=VARCHAR}, #{telegramJobStatus,jdbcType=CHAR}, #{jobStatus,jdbcType=CHAR}, 
+      #{jobSuccessTime,jdbcType=TIMESTAMP}, #{inviteCode,jdbcType=VARCHAR}, #{parentInviteCode,jdbcType=VARCHAR}, 
+      #{inviteUsersNumber,jdbcType=BIGINT}, #{loginToken,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cybercrowd.activity.model.UserActivityJob" keyColumn="id" useGeneratedKeys="true">
+    insert into user_activity_job
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="ownerAccountType != null">
+        owner_account_type,
+      </if>
+      <if test="ownerId != null">
+        owner_id,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="twitterId != null">
+        twitter_id,
+      </if>
+      <if test="twitterInfo != null">
+        twitter_info,
+      </if>
+      <if test="twitterJobStatus != null">
+        twitter_job_status,
+      </if>
+      <if test="discordId != null">
+        discord_id,
+      </if>
+      <if test="discordInfo != null">
+        discord_info,
+      </if>
+      <if test="discordJobStatus != null">
+        discord_job_status,
+      </if>
+      <if test="telegramId != null">
+        telegram_id,
+      </if>
+      <if test="telegramInfo != null">
+        telegram_info,
+      </if>
+      <if test="telegramJobStatus != null">
+        telegram_job_status,
+      </if>
+      <if test="jobStatus != null">
+        job_status,
+      </if>
+      <if test="jobSuccessTime != null">
+        job_success_time,
+      </if>
+      <if test="inviteCode != null">
+        invite_code,
+      </if>
+      <if test="parentInviteCode != null">
+        parent_invite_code,
+      </if>
+      <if test="inviteUsersNumber != null">
+        invite_users_number,
+      </if>
+      <if test="loginToken != null">
+        login_token,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAccountType != null">
+        #{ownerAccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null">
+        #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterId != null">
+        #{twitterId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterInfo != null">
+        #{twitterInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterJobStatus != null">
+        #{twitterJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="discordId != null">
+        #{discordId,jdbcType=VARCHAR},
+      </if>
+      <if test="discordInfo != null">
+        #{discordInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="discordJobStatus != null">
+        #{discordJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="telegramId != null">
+        #{telegramId,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramInfo != null">
+        #{telegramInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramJobStatus != null">
+        #{telegramJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="jobStatus != null">
+        #{jobStatus,jdbcType=CHAR},
+      </if>
+      <if test="jobSuccessTime != null">
+        #{jobSuccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentInviteCode != null">
+        #{parentInviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteUsersNumber != null">
+        #{inviteUsersNumber,jdbcType=BIGINT},
+      </if>
+      <if test="loginToken != null">
+        #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.UserActivityJob">
+    update user_activity_job
+    <set>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerAccountType != null">
+        owner_account_type = #{ownerAccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null">
+        owner_id = #{ownerId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterId != null">
+        twitter_id = #{twitterId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterInfo != null">
+        twitter_info = #{twitterInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterJobStatus != null">
+        twitter_job_status = #{twitterJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="discordId != null">
+        discord_id = #{discordId,jdbcType=VARCHAR},
+      </if>
+      <if test="discordInfo != null">
+        discord_info = #{discordInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="discordJobStatus != null">
+        discord_job_status = #{discordJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="telegramId != null">
+        telegram_id = #{telegramId,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramInfo != null">
+        telegram_info = #{telegramInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramJobStatus != null">
+        telegram_job_status = #{telegramJobStatus,jdbcType=CHAR},
+      </if>
+      <if test="jobStatus != null">
+        job_status = #{jobStatus,jdbcType=CHAR},
+      </if>
+      <if test="jobSuccessTime != null">
+        job_success_time = #{jobSuccessTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviteCode != null">
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parentInviteCode != null">
+        parent_invite_code = #{parentInviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteUsersNumber != null">
+        invite_users_number = #{inviteUsersNumber,jdbcType=BIGINT},
+      </if>
+      <if test="loginToken != null">
+        login_token = #{loginToken,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.UserActivityJob">
+    update user_activity_job
+    set job_name = #{jobName,jdbcType=VARCHAR},
+      owner_account_type = #{ownerAccountType,jdbcType=VARCHAR},
+      owner_id = #{ownerId,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      twitter_id = #{twitterId,jdbcType=VARCHAR},
+      twitter_info = #{twitterInfo,jdbcType=VARCHAR},
+      twitter_job_status = #{twitterJobStatus,jdbcType=CHAR},
+      discord_id = #{discordId,jdbcType=VARCHAR},
+      discord_info = #{discordInfo,jdbcType=VARCHAR},
+      discord_job_status = #{discordJobStatus,jdbcType=CHAR},
+      telegram_id = #{telegramId,jdbcType=VARCHAR},
+      telegram_info = #{telegramInfo,jdbcType=VARCHAR},
+      telegram_job_status = #{telegramJobStatus,jdbcType=CHAR},
+      job_status = #{jobStatus,jdbcType=CHAR},
+      job_success_time = #{jobSuccessTime,jdbcType=TIMESTAMP},
+      invite_code = #{inviteCode,jdbcType=VARCHAR},
+      parent_invite_code = #{parentInviteCode,jdbcType=VARCHAR},
+      invite_users_number = #{inviteUsersNumber,jdbcType=BIGINT},
+      login_token = #{loginToken,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findUserActivityJob" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from user_activity_job where job_name = #{jobName,jdbcType=VARCHAR} and owner_id = #{ownerId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findUserActivityJobByInviteCode" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from user_activity_job where job_name = #{jobName,jdbcType=VARCHAR} and invite_code = #{inviteCode,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findBindDiscordJob" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from user_activity_job where job_name = #{jobName,jdbcType=VARCHAR} and discord_id = #{discordId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findBindTwitterJob" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_activity_job where job_name = #{jobName,jdbcType=VARCHAR} and twitter_id = #{twitterId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectList" parameterType="org.cybercrowd.activity.model.UserActivityJob" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_activity_job
+    <include refid="Base_Column_Where"/>
+  </select>
+</mapper>

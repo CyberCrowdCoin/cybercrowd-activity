@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.CommunityBotInteractiveMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.CommunityBotInteractive">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="interactive_group_id" jdbcType="VARCHAR" property="interactiveGroupId" />
+    <result column="command" jdbcType="VARCHAR" property="command" />
+    <result column="interactive_tag" jdbcType="VARCHAR" property="interactiveTag" />
+    <result column="interactive_type" jdbcType="VARCHAR" property="interactiveType" />
+    <result column="previous_command" jdbcType="VARCHAR" property="previousCommand" />
+    <result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="interactive_expire" jdbcType="TIMESTAMP" property="interactiveExpire" />
+    <result column="vote_options" jdbcType="VARCHAR" property="voteOptions" />
+    <result column="service_class" jdbcType="VARCHAR" property="serviceClass" />
+    <result column="extend" jdbcType="VARCHAR" property="extend" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, interactive_group_id, command, interactive_tag, interactive_type, previous_command, 
+    reply_content, `status`, interactive_expire, vote_options, service_class, extend, 
+    extend2, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from community_bot_interactive
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from community_bot_interactive
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cybercrowd.activity.model.CommunityBotInteractive">
+    insert into community_bot_interactive (id, interactive_group_id, command, 
+      interactive_tag, interactive_type, previous_command, 
+      reply_content, `status`, interactive_expire, 
+      vote_options, service_class, extend, 
+      extend2, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{interactiveGroupId,jdbcType=VARCHAR}, #{command,jdbcType=VARCHAR}, 
+      #{interactiveTag,jdbcType=VARCHAR}, #{interactiveType,jdbcType=VARCHAR}, #{previousCommand,jdbcType=VARCHAR}, 
+      #{replyContent,jdbcType=VARCHAR}, #{status,jdbcType=CHAR}, #{interactiveExpire,jdbcType=TIMESTAMP}, 
+      #{voteOptions,jdbcType=VARCHAR}, #{serviceClass,jdbcType=VARCHAR}, #{extend,jdbcType=VARCHAR}, 
+      #{extend2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cybercrowd.activity.model.CommunityBotInteractive">
+    insert into community_bot_interactive
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="interactiveGroupId != null">
+        interactive_group_id,
+      </if>
+      <if test="command != null">
+        command,
+      </if>
+      <if test="interactiveTag != null">
+        interactive_tag,
+      </if>
+      <if test="interactiveType != null">
+        interactive_type,
+      </if>
+      <if test="previousCommand != null">
+        previous_command,
+      </if>
+      <if test="replyContent != null">
+        reply_content,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="interactiveExpire != null">
+        interactive_expire,
+      </if>
+      <if test="voteOptions != null">
+        vote_options,
+      </if>
+      <if test="serviceClass != null">
+        service_class,
+      </if>
+      <if test="extend != null">
+        extend,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="interactiveGroupId != null">
+        #{interactiveGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="interactiveTag != null">
+        #{interactiveTag,jdbcType=VARCHAR},
+      </if>
+      <if test="interactiveType != null">
+        #{interactiveType,jdbcType=VARCHAR},
+      </if>
+      <if test="previousCommand != null">
+        #{previousCommand,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null">
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="interactiveExpire != null">
+        #{interactiveExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voteOptions != null">
+        #{voteOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceClass != null">
+        #{serviceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null">
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.CommunityBotInteractive">
+    update community_bot_interactive
+    <set>
+      <if test="interactiveGroupId != null">
+        interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null">
+        command = #{command,jdbcType=VARCHAR},
+      </if>
+      <if test="interactiveTag != null">
+        interactive_tag = #{interactiveTag,jdbcType=VARCHAR},
+      </if>
+      <if test="interactiveType != null">
+        interactive_type = #{interactiveType,jdbcType=VARCHAR},
+      </if>
+      <if test="previousCommand != null">
+        previous_command = #{previousCommand,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null">
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="interactiveExpire != null">
+        interactive_expire = #{interactiveExpire,jdbcType=TIMESTAMP},
+      </if>
+      <if test="voteOptions != null">
+        vote_options = #{voteOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceClass != null">
+        service_class = #{serviceClass,jdbcType=VARCHAR},
+      </if>
+      <if test="extend != null">
+        extend = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.CommunityBotInteractive">
+    update community_bot_interactive
+    set interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR},
+      command = #{command,jdbcType=VARCHAR},
+      interactive_tag = #{interactiveTag,jdbcType=VARCHAR},
+      interactive_type = #{interactiveType,jdbcType=VARCHAR},
+      previous_command = #{previousCommand,jdbcType=VARCHAR},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      interactive_expire = #{interactiveExpire,jdbcType=TIMESTAMP},
+      vote_options = #{voteOptions,jdbcType=VARCHAR},
+      service_class = #{serviceClass,jdbcType=VARCHAR},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAvailableVoteInteractiveCommandList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    community_bot_interactive
+    where interactive_type = 'VOTE' and status = '1' and interactive_expire &gt;= now()
+  </select>
+
+  <select id="findExpireVoteInteractiveCommandList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    community_bot_interactive
+    where interactive_type = 'VOTE' and status = '1' and interactive_expire &lt;= now()
+  </select>
+
+</mapper>

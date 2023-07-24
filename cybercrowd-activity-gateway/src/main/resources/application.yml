@@ -1,0 +1,39 @@
+server:
+  port: 9010
+  servlet:
+    context-path: /activity
+spring:
+  application:
+    name: activity
+  profiles:
+    active: test
+    mvc:
+      static-path-pattern: /static/**
+    aop:
+      proxy-target-class: true
+#  jackson:
+#    time-zone: GMT+8
+#    serialization:
+#      WRITE_DATES_AS_TIMESTAMPS: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 50MB
+  cloud:
+    nacos:
+      config:
+        import-check:
+          enabled: false
+  config:
+    import:
+
+mybatis-plus:
+  mapper-locations: classpath:sqlmap/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+

@@ -1,0 +1,105 @@
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://13.251.21.157:3306/cybercrowd-activity?useUnicode=true&characterEncoding=utf8&autoReconnect=true&allowMultiQueries=true
+      username: dev
+      password: MyPJZB@aK2)ubhBYi
+      # 连接池的配置信息
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      maxActive: 20
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,slf4j,config
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        enabled: true
+        url-pattern: "/druid/*"
+        login-username: admin  # 登录账号
+        login-password: CyberPay&^20220818!@ # 登录密码
+        reset-enable: false
+        allow: ""  # 白名单 表示所有
+  redis:
+    host: 13.251.21.157
+    port: 6379
+    password: 3GdYT3FMjb4tXhM5ix1X
+    lettuce:
+      pool:
+        max-idle: 5
+        max-active: 50
+        max-wait: 1000
+        enabled: true
+    database: 0
+
+  activemq:
+    broker-url: failover:(tcp://13.251.21.157:61616)?Randomize=false
+    password: a$yDX^!PDyp7LgDz
+    user: user
+    pool:
+      enabled: false
+    send-timeout: 3000
+
+# twitter账号ID配置
+twitter:
+  oauth_v1:
+    client_secret: KGzm23jVQP5Y46HqFFcFHaNlp0NSqVtqfLf4kk33XQR6hhpMT2
+    client_key: EuxfQQqVXiB3T8nbWv59fUXHd
+    request_token_url: https://api.twitter.com/oauth/request_token
+    authorization_url: https://api.twitter.com/oauth/authorize?{0}
+    request_access_token_url: https://api.twitter.com/oauth/access_token
+    request_user_url: https://api.twitter.com/1.1/account/verify_credentials.json
+  oauth_v2:
+    client_id: b3h2X2xsTHRYVlJxVEpaaXNBLTc6MTpjaQ
+    token_url: https://api.twitter.com/2/oauth2/token
+    request_user_url: https://api.twitter.com/2/users/me?user.fields=created_at,profile_image_url
+  official_account_id: 1421074155156512769
+  #  official_account_id: 1555116916145999872
+  signature: KGzm23jVQP5Y46HqFFcFHaNlp0NSqVtqfLf4kk33XQR6hhpMT2
+
+telegram:
+  bot_token: 5532305761:AAE5yyww7rrRKjAwAT8I0zsG6S9V4kVKM5k
+  send_msssage_url: https://api.telegram.org/bot${telegram.bot_token}/sendMessage
+  get_chat_member_url: https://api.telegram.org/bot5532305761:AAE5yyww7rrRKjAwAT8I0zsG6S9V4kVKM5k/getChatMember?chat_id={0}&user_id={1}
+  send_message_photo_url: https://api.telegram.org/bot${telegram.bot_token}/sendPhoto
+# discord 配置
+discord:
+  client:
+    id: 1051361688378679336
+    secret: c8h4NG6eZs9RmXIGDpdKV3LEQ8bDXGjz
+  oauth_token_url: https://discord.com/api/oauth2/token
+  query_user_url: https://discord.com/api/users/@me
+  token: MTA0NTYyMjgyNjYxNjQ5NjIzOA.G0A9E3._WNAOeo-OO99JvxMONTJjiHeZDb2PlxrfZMGEs
+  user_avatar: https://cdn.discordapp.com/avatars/{0}/{1}.png
+  member_query: https://discord.com/api/guilds/1045577688095658044/members/{0}
+  authorization_basic: MTA1MTM2MTY4ODM3ODY3OTMzNjogQXJOX05fN2o1U1FicGtKUlZSRk9JSEt0S0ZxSUdkeUg=
+  discord_event_switch: off
+  bot_id: 1045622826616496238
+
+activity:
+  new_year_2022_share_url: https://activity.cybercrowd.org?inviteCode={0}
+  player_invite_link_url: https://activity.cybercrowd.org/lottery?inviteCode={0}
+  player_contract: '0xBeF790d35DeB9C4a0535A766767Af17278e8Ff2a'
+
+web3j:
+  ethereum:
+    rpc-url: https://data-seed-prebsc-1-s1.binance.org:8545/
+    chain-id: 97

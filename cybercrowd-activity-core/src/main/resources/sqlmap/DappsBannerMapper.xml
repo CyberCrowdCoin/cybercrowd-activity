@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.DappsBannerMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.DappsBanner">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="banner_intro" jdbcType="VARCHAR" property="bannerIntro" />
+    <result column="banner_image_url" jdbcType="VARCHAR" property="bannerImageUrl" />
+    <result column="banner_mobile_url" jdbcType="VARCHAR" property="bannerMobileUrl" />
+    <result column="jump_url" jdbcType="VARCHAR" property="jumpUrl" />
+    <result column="banner_status" jdbcType="CHAR" property="bannerStatus" />
+    <result column="expire_time" jdbcType="TIMESTAMP" property="expireTime" />
+    <result column="extend" jdbcType="VARCHAR" property="extend" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, banner_intro, banner_image_url,banner_mobile_url, jump_url, banner_status, expire_time, extend,
+    extend2, create_time, update_time
+  </sql>
+
+  <sql id="Where_Column_Example">
+    <where>
+      <if test="bannerIntro != null">
+        and banner_intro = #{bannerIntro,jdbcType=VARCHAR}
+      </if>
+      <if test="bannerImageUrl != null">
+        and banner_image_url = #{bannerImageUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="bannerMobileUrl != null">
+        and banner_mobile_url = #{bannerMobileUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="jumpUrl != null">
+        and jump_url = #{jumpUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="bannerStatus != null">
+        and banner_status = #{bannerStatus,jdbcType=CHAR}
+      </if>
+      <if test="expireTime != null">
+        and expire_time = #{expireTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="extend != null">
+        and extend = #{extend,jdbcType=VARCHAR}
+      </if>
+      <if test="extend2 != null">
+        and extend2 = #{extend2,jdbcType=VARCHAR}
+      </if>
+      <if test="createTime != null">
+        and create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null">
+        and update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dapps_banner
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dapps_banner
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.DappsBanner" useGeneratedKeys="true">
+    insert into dapps_banner (banner_intro, banner_image_url, banner_mobile_url, jump_url,
+      banner_status, expire_time, extend, 
+      extend2, create_time, update_time
+      )
+    values (#{bannerIntro,jdbcType=VARCHAR}, #{bannerImageUrl,jdbcType=VARCHAR},#{bannerMobileUrl,jdbcType=VARCHAR},
+      #{jumpUrl,jdbcType=VARCHAR},#{bannerStatus,jdbcType=CHAR}, #{expireTime,jdbcType=TIMESTAMP}, #{extend,jdbcType=VARCHAR},
+      #{extend2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.DappsBanner" useGeneratedKeys="true">
+    insert into dapps_banner
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bannerIntro != null">
+        banner_intro,
+      </if>
+      <if test="bannerImageUrl != null">
+        banner_image_url,
+      </if>
+      <if test="bannerMobileUrl != null">
+        banner_mobile_url,
+      </if>
+      <if test="jumpUrl != null">
+        jump_url,
+      </if>
+      <if test="bannerStatus != null">
+        banner_status,
+      </if>
+      <if test="expireTime != null">
+        expire_time,
+      </if>
+      <if test="extend != null">
+        extend,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="bannerIntro != null">
+        #{bannerIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImageUrl != null">
+        #{bannerImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerMobileUrl != null">
+        #{bannerMobileUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null">
+        #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerStatus != null">
+        #{bannerStatus,jdbcType=CHAR},
+      </if>
+      <if test="expireTime != null">
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend != null">
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.DappsBanner">
+    update dapps_banner
+    <set>
+      <if test="bannerIntro != null">
+        banner_intro = #{bannerIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerImageUrl != null">
+        banner_image_url = #{bannerImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerMobileUrl != null">
+        banner_mobile_url = #{bannerImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jumpUrl != null">
+        jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerStatus != null">
+        banner_status = #{bannerStatus,jdbcType=CHAR},
+      </if>
+      <if test="expireTime != null">
+        expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend != null">
+        extend = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.DappsBanner">
+    update dapps_banner
+    set banner_intro = #{bannerIntro,jdbcType=VARCHAR},
+      banner_image_url = #{bannerImageUrl,jdbcType=VARCHAR},
+      banner_mobile_url = #{bannerMobileUrl,jdbcType=VARCHAR},
+      jump_url = #{jumpUrl,jdbcType=VARCHAR},
+      banner_status = #{bannerStatus,jdbcType=CHAR},
+      expire_time = #{expireTime,jdbcType=TIMESTAMP},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectDappsBannerList" parameterType="org.cybercrowd.activity.model.DappsBanner" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from dapps_banner
+    <include refid="Where_Column_Example"/>
+  </select>
+</mapper>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.PlayerInfoMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.PlayerInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="round_no" jdbcType="VARCHAR" property="roundNo" />
+    <result property="playerIndex"   jdbcType="BIGINT"   column="player_index"    />
+    <result column="player_address" jdbcType="VARCHAR" property="playerAddress" />
+    <result column="invite_code" jdbcType="VARCHAR" property="inviteCode" />
+    <result column="invite_code_by" jdbcType="VARCHAR" property="inviteCodeBy" />
+    <result property="invitePlayer" jdbcType="VARCHAR"   column="invite_player" />
+    <result property="payAmount" jdbcType="BIGINT"   column="pay_amount"    />
+    <result column="bonus_amount" jdbcType="BIGINT" property="bonusAmount" />
+    <result column="bonus" jdbcType="DECIMAL" property="bonus" />
+    <result column="winning_status" jdbcType="CHAR" property="winningStatus" />
+    <result column="game_status" jdbcType="CHAR" property="gameStatus" />
+    <result column="lottery_time" jdbcType="TIMESTAMP" property="lotteryTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap id="BaseTicketHistoryResultMap" type="org.cybercrowd.activity.dto.TicketHistoryDto">
+    <result column="round" jdbcType="VARCHAR" property="round" />
+    <result column="buyNumber" jdbcType="BIGINT" property="buyNumber" />
+    <result column="spendAmount" jdbcType="DECIMAL" property="spendAmount" />
+    <result column="bonusAmount" jdbcType="VARCHAR" property="bonusAmount" />
+    <result column="gameStatus" jdbcType="CHAR" property="gameStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, round_no,player_index, player_address, invite_code, invite_code_by,invite_player,pay_amount, bonus_amount, bonus, winning_status,
+    game_status, lottery_time, create_time, update_time
+  </sql>
+  
+  <sql id="Where_Column_Example">
+    <where>
+      <if test="roundNo != null">
+        round_no = #{roundNo,jdbcType=VARCHAR}
+      </if>
+      <if test="playerIndex != null">
+        AND player_index = #{playerIndex,jdbcType=BIGINT}
+      </if>
+      <if test="playerAddress != null">
+        AND player_address = #{playerAddress,jdbcType=VARCHAR}
+      </if>
+      <if test="inviteCode != null">
+        AND invite_code = #{inviteCode,jdbcType=VARCHAR}
+      </if>
+      <if test="inviteCodeBy != null">
+        AND invite_code_by = #{inviteCodeBy,jdbcType=VARCHAR}
+      </if>
+      <if test="invitePlayer != null">
+        AND invite_player = #{invitePlayer,jdbcType=VARCHAR}
+      </if>
+      <if test="payAmount != null">
+        AND pay_amount = #{payAmount,jdbcType=BIGINT}
+      </if>
+      <if test="bonusAmount != null">
+        AND bonus_amount = #{bonusAmount,jdbcType=BIGINT}
+      </if>
+      <if test="bonus != null">
+        AND bonus = #{bonus,jdbcType=DECIMAL}
+      </if>
+      <if test="winningStatus != null">
+        AND winning_status = #{winningStatus,jdbcType=CHAR}
+      </if>
+      <if test="gameStatus != null">
+        AND game_status = #{gameStatus,jdbcType=CHAR}
+      </if>
+      <if test="lotteryTime != null">
+        AND lottery_time = #{lotteryTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="createTime != null">
+        AND create_time = #{createTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="updateTime != null">
+        AND update_time = #{updateTime,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from player_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from player_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.PlayerInfo" useGeneratedKeys="true">
+    insert into player_info (round_no,player_index, player_address, invite_code,
+      invite_code_by,invite_player, pay_amount bonus_amount, bonus,
+      winning_status, game_status, lottery_time, 
+      create_time, update_time)
+    values (#{roundNo,jdbcType=VARCHAR},#{playerIndex,jdbcType=BIGINT}, #{playerAddress,jdbcType=VARCHAR}, #{inviteCode,jdbcType=VARCHAR},
+      #{inviteCodeBy,jdbcType=VARCHAR},#{invitePlayer,jdbcType=VARCHAR}, #{payAmount,jdbcType=BIGINT},
+      #{bonusAmount,jdbcType=BIGINT}, #{bonus,jdbcType=DECIMAL},#{winningStatus,jdbcType=CHAR},
+      #{gameStatus,jdbcType=CHAR}, #{lotteryTime,jdbcType=TIMESTAMP},#{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.PlayerInfo" useGeneratedKeys="true">
+    insert into player_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="roundNo != null">
+        round_no,
+      </if>
+      <if test="playerIndex != null">
+        player_index,
+      </if>
+      <if test="playerAddress != null">
+        player_address,
+      </if>
+      <if test="inviteCode != null">
+        invite_code,
+      </if>
+      <if test="inviteCodeBy != null">
+        invite_code_by,
+      </if>
+      <if test="invitePlayer != null">
+        invite_player,
+      </if>
+      <if test="payAmount != null">
+        pay_amount,
+      </if>
+      <if test="bonusAmount != null">
+        bonus_amount,
+      </if>
+      <if test="bonus != null">
+        bonus,
+      </if>
+      <if test="winningStatus != null">
+        winning_status,
+      </if>
+      <if test="gameStatus != null">
+        game_status,
+      </if>
+      <if test="lotteryTime != null">
+        lottery_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="roundNo != null">
+        #{roundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playerIndex != null">
+        #{playerIndex,jdbcType=BIGINT},
+      </if>
+      <if test="playerAddress != null">
+        #{playerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCode != null">
+        #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCodeBy != null">
+        #{inviteCodeBy,jdbcType=VARCHAR},
+      </if>
+      <if test="invitePlayer != null">
+        #{invitePlayer,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=BIGINT},
+      </if>
+      <if test="bonusAmount != null">
+        #{bonusAmount,jdbcType=BIGINT},
+      </if>
+      <if test="bonus != null">
+        #{bonus,jdbcType=DECIMAL},
+      </if>
+      <if test="winningStatus != null">
+        #{winningStatus,jdbcType=CHAR},
+      </if>
+      <if test="gameStatus != null">
+        #{gameStatus,jdbcType=CHAR},
+      </if>
+      <if test="lotteryTime != null">
+        #{lotteryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.PlayerInfo">
+    update player_info
+    <set>
+      <if test="roundNo != null">
+        round_no = #{roundNo,jdbcType=VARCHAR},
+      </if>
+      <if test="playerIndex != null">
+        player_index = #{playerIndex,jdbcType=BIGINT},
+      </if>
+      <if test="playerAddress != null">
+        player_address = #{playerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCode != null">
+        invite_code = #{inviteCode,jdbcType=VARCHAR},
+      </if>
+      <if test="inviteCodeBy != null">
+        invite_code_by = #{inviteCodeBy,jdbcType=VARCHAR},
+      </if>
+      <if test="invitePlayer != null">
+        invite_player = #{invitePlayer,jdbcType=VARCHAR},
+      </if>
+      <if test="payAmount != null">
+        pay_amount = #{payAmount,jdbcType=BIGINT},
+      </if>
+      <if test="bonusAmount != null">
+        bonus_amount = #{bonusAmount,jdbcType=BIGINT},
+      </if>
+      <if test="bonus != null">
+        bonus = #{bonus,jdbcType=DECIMAL},
+      </if>
+      <if test="winningStatus != null">
+        winning_status = #{winningStatus,jdbcType=CHAR},
+      </if>
+      <if test="gameStatus != null">
+        game_status = #{gameStatus,jdbcType=CHAR},
+      </if>
+      <if test="lotteryTime != null">
+        lottery_time = #{lotteryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.PlayerInfo">
+    update player_info
+    set round_no = #{roundNo,jdbcType=VARCHAR},
+      player_address = #{playerAddress,jdbcType=VARCHAR},
+      player_address = #{playerAddress,jdbcType=VARCHAR},
+      invite_code = #{inviteCode,jdbcType=VARCHAR},
+      invite_code_by = #{inviteCodeBy,jdbcType=VARCHAR},
+      invite_player = #{invitePlayer,jdbcType=VARCHAR},
+      pay_amount = #{payAmount,jdbcType=BIGINT},
+      bonus_amount = #{bonusAmount,jdbcType=BIGINT},
+      bonus = #{bonus,jdbcType=DECIMAL},
+      winning_status = #{winningStatus,jdbcType=CHAR},
+      game_status = #{gameStatus,jdbcType=CHAR},
+      lottery_time = #{lotteryTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectPlayer" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from player_info
+    where
+    round_no = #{roundNo,jdbcType=VARCHAR} and player_address = #{playerAddress,jdbcType=VARCHAR}
+  </select>
+
+  <select id="findPlayerWinningListByRoundNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List" />
+    from player_info
+    where
+    round_no = #{roundNo,jdbcType=VARCHAR} and game_status = '1'
+  </select>
+
+  <select id="findPlayerTicketHistoryList" parameterType="java.lang.String" resultMap="BaseTicketHistoryResultMap">
+    select
+           round_no as round,
+           COUNT(id) as buyNumber,
+           sum(pay_amount) as spendAmount,
+           SUM(bonus)as bonusAmount,
+           game_status as gameStatus,
+           create_time
+    from player_info
+     where
+           player_address =#{playerAddress,jdbcType=VARCHAR}
+       and game_status = '2'
+    GROUP BY round_no order by create_time desc;
+  </select>
+  
+  <select id="selectOnePlayer" parameterType="org.cybercrowd.activity.model.PlayerInfo" resultMap="BaseResultMap">
+     select
+        <include refid="Base_Column_List"/>
+     from player_info
+     <include refid="Where_Column_Example"/>
+  </select>
+
+</mapper>

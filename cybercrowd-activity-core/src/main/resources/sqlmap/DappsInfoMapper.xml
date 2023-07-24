@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.DappsInfoMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.DappsInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="dapp_type" jdbcType="VARCHAR" property="dappType" />
+    <result column="dapp_name" jdbcType="VARCHAR" property="dappName" />
+    <result column="dapp_logo" jdbcType="VARCHAR" property="dappLogo" />
+    <result column="dapp_bg_image" jdbcType="VARCHAR" property="dappBgImage" />
+    <result column="dapp_intro" jdbcType="VARCHAR" property="dappIntro" />
+    <result column="dapp_details_intro" jdbcType="LONGVARCHAR" property="dappDetailsIntro" />
+    <result column="dapp_link" jdbcType="LONGVARCHAR" property="dappLink" />
+    <result column="dapp_official_website" jdbcType="VARCHAR" property="dappOfficialWebsite" />
+    <result column="dapp_twitter" jdbcType="VARCHAR" property="dappTwitter" />
+    <result column="dapp_discrod" jdbcType="VARCHAR" property="dappDiscrod" />
+    <result column="dapp_telegram" jdbcType="VARCHAR" property="dappTelegram" />
+    <result column="dapp_hot" jdbcType="BIGINT" property="dappHot" />
+    <result column="dapp_hot_status" jdbcType="CHAR" property="dappHotStatus" />
+    <result column="dapp_status" jdbcType="CHAR" property="dappStatus" />
+    <result column="dapp_offline_time" jdbcType="TIMESTAMP" property="dappOfflineTime" />
+    <result column="extend" jdbcType="VARCHAR" property="extend" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, dapp_type, dapp_name, dapp_logo,dapp_bg_image, dapp_intro,dapp_details_intro, dapp_link, dapp_official_website, dapp_twitter,
+    dapp_discrod, dapp_telegram, dapp_hot, dapp_hot_status, dapp_status, dapp_offline_time, 
+    extend, extend2, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+        <include refid="Base_Column_List" />
+    from dapps_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from dapps_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.DappsInfo" useGeneratedKeys="true">
+    insert into dapps_info (dapp_type, dapp_name, dapp_logo, dapp_bg_image,
+      dapp_intro, dapp_official_website, dapp_twitter, 
+      dapp_discrod, dapp_telegram, dapp_hot, 
+      dapp_hot_status, dapp_status, dapp_offline_time, 
+      extend, extend2, create_time, 
+      update_time, dapp_details_intro, dapp_link
+      )
+    values (#{dappType,jdbcType=VARCHAR}, #{dappName,jdbcType=VARCHAR}, #{dappLogo,jdbcType=VARCHAR},#{dappBgImage,jdbcType=VARCHAR},
+      #{dappIntro,jdbcType=VARCHAR}, #{dappOfficialWebsite,jdbcType=VARCHAR}, #{dappTwitter,jdbcType=VARCHAR}, 
+      #{dappDiscrod,jdbcType=VARCHAR}, #{dappTelegram,jdbcType=VARCHAR}, #{dappHot,jdbcType=BIGINT}, 
+      #{dappHotStatus,jdbcType=CHAR}, #{dappStatus,jdbcType=CHAR}, #{dappOfflineTime,jdbcType=TIMESTAMP}, 
+      #{extend,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{dappDetailsIntro,jdbcType=LONGVARCHAR}, #{dappLink,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.DappsInfo" useGeneratedKeys="true">
+    insert into dapps_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dappType != null">
+        dapp_type,
+      </if>
+      <if test="dappName != null">
+        dapp_name,
+      </if>
+      <if test="dappLogo != null">
+        dapp_logo,
+      </if>
+      <if test="dappBgImage != null">
+        dapp_bg_image,
+      </if>
+      <if test="dappIntro != null">
+        dapp_intro,
+      </if>
+      <if test="dappOfficialWebsite != null">
+        dapp_official_website,
+      </if>
+      <if test="dappTwitter != null">
+        dapp_twitter,
+      </if>
+      <if test="dappDiscrod != null">
+        dapp_discrod,
+      </if>
+      <if test="dappTelegram != null">
+        dapp_telegram,
+      </if>
+      <if test="dappHot != null">
+        dapp_hot,
+      </if>
+      <if test="dappHotStatus != null">
+        dapp_hot_status,
+      </if>
+      <if test="dappStatus != null">
+        dapp_status,
+      </if>
+      <if test="dappOfflineTime != null">
+        dapp_offline_time,
+      </if>
+      <if test="extend != null">
+        extend,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="dappDetailsIntro != null">
+        dapp_details_intro,
+      </if>
+      <if test="dappLink != null">
+        dapp_link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dappType != null">
+        #{dappType,jdbcType=VARCHAR},
+      </if>
+      <if test="dappName != null">
+        #{dappName,jdbcType=VARCHAR},
+      </if>
+      <if test="dappLogo != null">
+        #{dappLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="dappBgImage != null">
+        #{dappBgImage,jdbcType=VARCHAR},
+      </if>
+      <if test="dappIntro != null">
+        #{dappIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="dappOfficialWebsite != null">
+        #{dappOfficialWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="dappTwitter != null">
+        #{dappTwitter,jdbcType=VARCHAR},
+      </if>
+      <if test="dappDiscrod != null">
+        #{dappDiscrod,jdbcType=VARCHAR},
+      </if>
+      <if test="dappTelegram != null">
+        #{dappTelegram,jdbcType=VARCHAR},
+      </if>
+      <if test="dappHot != null">
+        #{dappHot,jdbcType=BIGINT},
+      </if>
+      <if test="dappHotStatus != null">
+        #{dappHotStatus,jdbcType=CHAR},
+      </if>
+      <if test="dappStatus != null">
+        #{dappStatus,jdbcType=CHAR},
+      </if>
+      <if test="dappOfflineTime != null">
+        #{dappOfflineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend != null">
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dappDetailsIntro != null">
+        #{dappDetailsIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dappLink != null">
+        #{dappLink,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.DappsInfo">
+    update dapps_info
+    <set>
+      <if test="dappType != null">
+        dapp_type = #{dappType,jdbcType=VARCHAR},
+      </if>
+      <if test="dappName != null">
+        dapp_name = #{dappName,jdbcType=VARCHAR},
+      </if>
+      <if test="dappLogo != null">
+        dapp_logo = #{dappLogo,jdbcType=VARCHAR},
+      </if>
+      <if test="dappBgImage != null">
+        dapp_bg_image = #{dappBgImage,jdbcType=VARCHAR},
+      </if>
+      <if test="dappIntro != null">
+        dapp_intro = #{dappIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="dappOfficialWebsite != null">
+        dapp_official_website = #{dappOfficialWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="dappTwitter != null">
+        dapp_twitter = #{dappTwitter,jdbcType=VARCHAR},
+      </if>
+      <if test="dappDiscrod != null">
+        dapp_discrod = #{dappDiscrod,jdbcType=VARCHAR},
+      </if>
+      <if test="dappTelegram != null">
+        dapp_telegram = #{dappTelegram,jdbcType=VARCHAR},
+      </if>
+      <if test="dappHot != null">
+        dapp_hot = #{dappHot,jdbcType=BIGINT},
+      </if>
+      <if test="dappHotStatus != null">
+        dapp_hot_status = #{dappHotStatus,jdbcType=CHAR},
+      </if>
+      <if test="dappStatus != null">
+        dapp_status = #{dappStatus,jdbcType=CHAR},
+      </if>
+      <if test="dappOfflineTime != null">
+        dapp_offline_time = #{dappOfflineTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="extend != null">
+        extend = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dappDetailsIntro != null">
+        dapp_details_intro = #{dappDetailsIntro,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="dappLink != null">
+        dapp_link = #{dappLink,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.DappsInfo">
+    update dapps_info
+    set dapp_type = #{dappType,jdbcType=VARCHAR},
+      dapp_name = #{dappName,jdbcType=VARCHAR},
+      dapp_logo = #{dappLogo,jdbcType=VARCHAR},
+      dapp_bg_image = #{dappBgImage,jdbcType=VARCHAR},
+      dapp_intro = #{dappIntro,jdbcType=VARCHAR},
+      dapp_official_website = #{dappOfficialWebsite,jdbcType=VARCHAR},
+      dapp_twitter = #{dappTwitter,jdbcType=VARCHAR},
+      dapp_discrod = #{dappDiscrod,jdbcType=VARCHAR},
+      dapp_telegram = #{dappTelegram,jdbcType=VARCHAR},
+      dapp_hot = #{dappHot,jdbcType=BIGINT},
+      dapp_hot_status = #{dappHotStatus,jdbcType=CHAR},
+      dapp_status = #{dappStatus,jdbcType=CHAR},
+      dapp_offline_time = #{dappOfflineTime,jdbcType=TIMESTAMP},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      dapp_details_intro = #{dappDetailsIntro,jdbcType=LONGVARCHAR},
+      dapp_link = #{dappLink,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.DappsInfo">
+    update dapps_info
+    set dapp_type = #{dappType,jdbcType=VARCHAR},
+      dapp_name = #{dappName,jdbcType=VARCHAR},
+      dapp_logo = #{dappLogo,jdbcType=VARCHAR},
+      dapp_bg_image = #{dappBgImage,jdbcType=VARCHAR},
+      dapp_intro = #{dappIntro,jdbcType=VARCHAR},
+      dapp_official_website = #{dappOfficialWebsite,jdbcType=VARCHAR},
+      dapp_twitter = #{dappTwitter,jdbcType=VARCHAR},
+      dapp_discrod = #{dappDiscrod,jdbcType=VARCHAR},
+      dapp_telegram = #{dappTelegram,jdbcType=VARCHAR},
+      dapp_hot = #{dappHot,jdbcType=BIGINT},
+      dapp_hot_status = #{dappHotStatus,jdbcType=CHAR},
+      dapp_status = #{dappStatus,jdbcType=CHAR},
+      dapp_offline_time = #{dappOfflineTime,jdbcType=TIMESTAMP},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectDappsList" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from dapps_info
+    <where>
+      dapp_status = '1'
+      <if test="dappType != null and dappType != ''">
+        and dapp_type = #{dappType,jdbcType=VARCHAR}
+      </if>
+      <if test="dappHotStatus != null">
+        and dapp_hot_status = #{dappHotStatus,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>

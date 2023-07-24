@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.VoteInteractiveRecordMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.VoteInteractiveRecord">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="interactive_group_id" jdbcType="VARCHAR" property="interactiveGroupId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_account_type" jdbcType="VARCHAR" property="userAccountType" />
+    <result column="vote_option" jdbcType="VARCHAR" property="voteOption" />
+    <result column="vote_message" jdbcType="VARCHAR" property="voteMessage" />
+    <result column="vote_status" jdbcType="CHAR" property="voteStatus" />
+    <result column="extend" jdbcType="VARCHAR" property="extend" />
+    <result column="extend2" jdbcType="VARCHAR" property="extend2" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="airdrop_amount" jdbcType="DECIMAL" property="airdropAmount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="org.cybercrowd.activity.model.VoteInteractiveRecord">
+    <result column="wallet_address" jdbcType="LONGVARCHAR" property="walletAddress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, interactive_group_id, user_id, user_account_type, vote_option, vote_message, 
+    vote_status, extend, extend2, create_time, update_time, airdrop_amount
+  </sql>
+  <sql id="Blob_Column_List">
+    wallet_address
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from vote_interactive_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from vote_interactive_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.VoteInteractiveRecord" useGeneratedKeys="true">
+    insert into vote_interactive_record (interactive_group_id, user_id, user_account_type, 
+      vote_option, vote_message, vote_status, 
+      extend, extend2, create_time, 
+      update_time, airdrop_amount, wallet_address
+      )
+    values (#{interactiveGroupId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userAccountType,jdbcType=VARCHAR}, 
+      #{voteOption,jdbcType=VARCHAR}, #{voteMessage,jdbcType=VARCHAR}, #{voteStatus,jdbcType=CHAR}, 
+      #{extend,jdbcType=VARCHAR}, #{extend2,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{airdropAmount,jdbcType=DECIMAL}, #{walletAddress,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.VoteInteractiveRecord" useGeneratedKeys="true">
+    insert into vote_interactive_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="interactiveGroupId != null">
+        interactive_group_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userAccountType != null">
+        user_account_type,
+      </if>
+      <if test="voteOption != null">
+        vote_option,
+      </if>
+      <if test="voteMessage != null">
+        vote_message,
+      </if>
+      <if test="voteStatus != null">
+        vote_status,
+      </if>
+      <if test="extend != null">
+        extend,
+      </if>
+      <if test="extend2 != null">
+        extend2,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="airdropAmount != null">
+        airdrop_amount,
+      </if>
+      <if test="walletAddress != null">
+        wallet_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="interactiveGroupId != null">
+        #{interactiveGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountType != null">
+        #{userAccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="voteOption != null">
+        #{voteOption,jdbcType=VARCHAR},
+      </if>
+      <if test="voteMessage != null">
+        #{voteMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="voteStatus != null">
+        #{voteStatus,jdbcType=CHAR},
+      </if>
+      <if test="extend != null">
+        #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="airdropAmount != null">
+        #{airdropAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="walletAddress != null">
+        #{walletAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.VoteInteractiveRecord">
+    update vote_interactive_record
+    <set>
+      <if test="interactiveGroupId != null">
+        interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userAccountType != null">
+        user_account_type = #{userAccountType,jdbcType=VARCHAR},
+      </if>
+      <if test="voteOption != null">
+        vote_option = #{voteOption,jdbcType=VARCHAR},
+      </if>
+      <if test="voteMessage != null">
+        vote_message = #{voteMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="voteStatus != null">
+        vote_status = #{voteStatus,jdbcType=CHAR},
+      </if>
+      <if test="extend != null">
+        extend = #{extend,jdbcType=VARCHAR},
+      </if>
+      <if test="extend2 != null">
+        extend2 = #{extend2,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="airdropAmount != null">
+        airdrop_amount = #{airdropAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="walletAddress != null">
+        wallet_address = #{walletAddress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.cybercrowd.activity.model.VoteInteractiveRecord">
+    update vote_interactive_record
+    set interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_account_type = #{userAccountType,jdbcType=VARCHAR},
+      vote_option = #{voteOption,jdbcType=VARCHAR},
+      vote_message = #{voteMessage,jdbcType=VARCHAR},
+      vote_status = #{voteStatus,jdbcType=CHAR},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      airdrop_amount = #{airdropAmount,jdbcType=DECIMAL},
+      wallet_address = #{walletAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.VoteInteractiveRecord">
+    update vote_interactive_record
+    set interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      user_account_type = #{userAccountType,jdbcType=VARCHAR},
+      vote_option = #{voteOption,jdbcType=VARCHAR},
+      vote_message = #{voteMessage,jdbcType=VARCHAR},
+      vote_status = #{voteStatus,jdbcType=CHAR},
+      extend = #{extend,jdbcType=VARCHAR},
+      extend2 = #{extend2,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      airdrop_amount = #{airdropAmount,jdbcType=DECIMAL},
+      wallet_address = #{walletAddress,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findCommunityBotInteractiveVoteRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from
+    vote_interactive_record
+    where user_id = #{userId,jdbcType=VARCHAR} and user_account_type = #{accountType,jdbcType=VARCHAR}
+    and interactive_group_id = #{interactiveGroupId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="countTicketQuantity" parameterType="java.lang.String" resultType="java.math.BigDecimal">
+    select
+        sum(airdrop_amount)
+    from
+    vote_interactive_record where wallet_address = #{walletAddr,jdbcType=LONGVARCHAR}
+  </select>
+</mapper>

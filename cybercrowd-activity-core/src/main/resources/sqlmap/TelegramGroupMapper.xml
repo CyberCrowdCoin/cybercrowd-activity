@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.TelegramGroupMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.TelegramGroup">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="telegram_group_id" jdbcType="VARCHAR" property="telegramGroupId" />
+    <result column="telegram_group_name" jdbcType="VARCHAR" property="telegramGroupName" />
+    <result column="telegram_bot_name" jdbcType="VARCHAR" property="telegramBotName" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, telegram_group_id, telegram_group_name, telegram_bot_name, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from telegram_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from telegram_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.cybercrowd.activity.model.TelegramGroup" keyColumn="id" useGeneratedKeys="true">
+    insert into telegram_group (id, telegram_group_id, telegram_group_name, 
+      telegram_bot_name, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{telegramGroupId,jdbcType=VARCHAR}, #{telegramGroupName,jdbcType=VARCHAR}, 
+      #{telegramBotName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.cybercrowd.activity.model.TelegramGroup" keyColumn="id" useGeneratedKeys="true">
+    insert into telegram_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="telegramGroupId != null">
+        telegram_group_id,
+      </if>
+      <if test="telegramGroupName != null">
+        telegram_group_name,
+      </if>
+      <if test="telegramBotName != null">
+        telegram_bot_name,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="telegramGroupId != null">
+        #{telegramGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramGroupName != null">
+        #{telegramGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramBotName != null">
+        #{telegramBotName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.TelegramGroup">
+    update telegram_group
+    <set>
+      <if test="telegramGroupId != null">
+        telegram_group_id = #{telegramGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramGroupName != null">
+        telegram_group_name = #{telegramGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="telegramBotName != null">
+        telegram_bot_name = #{telegramBotName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.TelegramGroup">
+    update telegram_group
+    set telegram_group_id = #{telegramGroupId,jdbcType=VARCHAR},
+      telegram_group_name = #{telegramGroupName,jdbcType=VARCHAR},
+      telegram_bot_name = #{telegramBotName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findTelegramGroupByGroupId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+        <include refid="Base_Column_List"/>
+    from telegram_group
+    where  telegram_group_id = #{groupId,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.cybercrowd.activity.mapper.TwitterPrivateMessageMapper">
+  <resultMap id="BaseResultMap" type="org.cybercrowd.activity.model.TwitterPrivateMessage">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="twitter_user_id" jdbcType="VARCHAR" property="twitterUserId" />
+    <result column="twitter_user_name" jdbcType="VARCHAR" property="twitterUserName" />
+    <result column="message_topic" jdbcType="VARCHAR" property="messageTopic" />
+    <result column="mesage" jdbcType="VARCHAR" property="mesage" />
+    <result column="send_status" jdbcType="CHAR" property="sendStatus" />
+    <result column="error" jdbcType="VARCHAR" property="error" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, twitter_user_id, twitter_user_name, message_topic, mesage, send_status, error, 
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from twitter_private_message
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from twitter_private_message
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.TwitterPrivateMessage" useGeneratedKeys="true">
+    insert into twitter_private_message (twitter_user_id, twitter_user_name, message_topic, 
+      mesage, send_status, error, 
+      create_time, update_time)
+    values (#{twitterUserId,jdbcType=VARCHAR}, #{twitterUserName,jdbcType=VARCHAR}, #{messageTopic,jdbcType=VARCHAR}, 
+      #{mesage,jdbcType=VARCHAR}, #{sendStatus,jdbcType=CHAR}, #{error,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="org.cybercrowd.activity.model.TwitterPrivateMessage" useGeneratedKeys="true">
+    insert into twitter_private_message
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="twitterUserId != null">
+        twitter_user_id,
+      </if>
+      <if test="twitterUserName != null">
+        twitter_user_name,
+      </if>
+      <if test="messageTopic != null">
+        message_topic,
+      </if>
+      <if test="mesage != null">
+        mesage,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="error != null">
+        error,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="twitterUserId != null">
+        #{twitterUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUserName != null">
+        #{twitterUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTopic != null">
+        #{messageTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="mesage != null">
+        #{mesage,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="error != null">
+        #{error,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cybercrowd.activity.model.TwitterPrivateMessage">
+    update twitter_private_message
+    <set>
+      <if test="twitterUserId != null">
+        twitter_user_id = #{twitterUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="twitterUserName != null">
+        twitter_user_name = #{twitterUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="messageTopic != null">
+        message_topic = #{messageTopic,jdbcType=VARCHAR},
+      </if>
+      <if test="mesage != null">
+        mesage = #{mesage,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStatus != null">
+        send_status = #{sendStatus,jdbcType=CHAR},
+      </if>
+      <if test="error != null">
+        error = #{error,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cybercrowd.activity.model.TwitterPrivateMessage">
+    update twitter_private_message
+    set twitter_user_id = #{twitterUserId,jdbcType=VARCHAR},
+      twitter_user_name = #{twitterUserName,jdbcType=VARCHAR},
+      message_topic = #{messageTopic,jdbcType=VARCHAR},
+      mesage = #{mesage,jdbcType=VARCHAR},
+      send_status = #{sendStatus,jdbcType=CHAR},
+      error = #{error,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findNotSentPrivateMessageList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/> from twitter_private_message
+    <where>
+      send_status = '0'
+      <if test="null != topic and '' != topic">
+        and message_topic = #{topic,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
+</mapper>
